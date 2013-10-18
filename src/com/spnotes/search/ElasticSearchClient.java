@@ -2,6 +2,7 @@ package com.spnotes.search;
 
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
@@ -51,6 +52,13 @@ public class ElasticSearchClient {
     }
 
     public void deleteRecord(String index, String type, String id){
+        Client client = getClient();
+        DeleteResponse deleteResponse = client.prepareDelete(index,type,id).execute().actionGet();
+        System.out.println( deleteResponse.getId());
+    }
 
+    public void updateRecord(String index, String type, Map sourceMap){
+        Client client = getClient();
+    //    client.prepareUpdate().set
     }
 }
